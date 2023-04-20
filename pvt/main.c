@@ -37,7 +37,8 @@ main (int argc, char **argv)
             double h = (b - a) / n;
             double s = 0.0;
             sq[k] = 0;
-// Ждем пока все потоки закончат обнуление sq[k], s
+// Ждем пока все потоки закончат обнуление sq[k], чтобы данные которые были
+// одним потоком не были заулены другим потоком который отстаёт
 #pragma omp barrier
 #pragma omp for nowait
             for (int i = 0; i < n; i++)
@@ -49,7 +50,6 @@ main (int argc, char **argv)
             if (n > n0)
               delta = fabs (sq[k] - sq[k ^ 1]) / 3.0;
 #if 0
-printf("n=%d i=%d sq=%.12f delta=%.12f\n", n, k, sq[k], delta);
 #endif
           }
 #pragma omp master
