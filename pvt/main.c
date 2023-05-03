@@ -43,7 +43,6 @@ main (int argc, char **argv)
               s += func (a + h * (i + 0.5));
 #pragma omp atomic
             sq[k] += s * h;
-// Ждем пока все потоки обновят sq[k]
 #pragma omp barrier
             if (n > n0)
               delta = fabs (sq[k] - sq[k ^ 1]) / 3.0;
