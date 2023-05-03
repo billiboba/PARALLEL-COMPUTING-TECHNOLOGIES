@@ -37,8 +37,6 @@ main (int argc, char **argv)
             double h = (b - a) / n;
             double s = 0.0;
             sq[k] = 0;
-// Ждем пока все потоки закончат обнуление sq[k], чтобы данные которые были
-// одним потоком не были заулены другим потоком который отстаёт
 #pragma omp barrier
 #pragma omp for nowait
             for (int i = 0; i < n; i++)
